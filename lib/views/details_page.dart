@@ -65,16 +65,14 @@ class DetailsPage extends StatelessWidget {
             skinName.first = nameChamp;
             var championSpellsList =
                 champions.data!.championUniqueInfo!.spells!.toList();
-            var championSpells = championSpellsList.map((e) => e.id);
+            var championSpellsId = championSpellsList.map((e) => e.id);
             var championSpellsName = championSpellsList.map((e) => e.name);
             var championSpellDescription =
                 championSpellsList.map((e) => e.description);
-            var championPassive =
-                champions.data!.championUniqueInfo!.passive!.image!.full;
-            var championPassiveName =
-                champions.data!.championUniqueInfo!.passive!.name;
-            var championPassiveDescription =
-                champions.data!.championUniqueInfo!.passive!.description;
+            var championPassive = champions.data!.championUniqueInfo!.passive!;
+            var championPassiveImg = championPassive.image!.full;
+            var championPassiveName = championPassive.name;
+            var championPassiveDescription = championPassive.description;
 
             var onTapText = ''.obs;
             return Column(
@@ -87,10 +85,10 @@ class DetailsPage extends StatelessWidget {
                     onTapText: onTapText,
                     championPassiveDescription: championPassiveDescription,
                     championPassiveName: championPassiveName,
-                    championPassive: championPassive,
+                    championPassive: championPassiveImg,
                     championSpellDescription: championSpellDescription,
                     championSpellsName: championSpellsName,
-                    championSpells: championSpells),
+                    championSpells: championSpellsId),
                 const SizedBox(
                   height: 20,
                 ),
