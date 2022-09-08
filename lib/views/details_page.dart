@@ -3,8 +3,9 @@ import 'package:get/get.dart';
 import 'package:lol_api_getx_dio_app/global_variables/global_variables.dart';
 import 'package:lol_api_getx_dio_app/models/skin_model.dart';
 import 'package:lol_api_getx_dio_app/views/home_page.dart';
-import 'package:smooth_page_indicator/smooth_page_indicator.dart';
 import '../services/champion_api.dart';
+import 'details_page/components/pageview_champion_list_skins_component.dart';
+import 'details_page/components/row_champion_passive_and_spells_component.dart';
 
 class DetailsPage extends StatelessWidget {
   const DetailsPage({super.key});
@@ -78,114 +79,20 @@ class DetailsPage extends StatelessWidget {
             var onTapText = ''.obs;
             return Column(
               children: [
-                SizedBox(
-                  height: 500,
-                  child: PageView.builder(
-                    controller: pageViewController,
-                    itemCount: skinName.length,
-                    itemBuilder: (context, index) => Column(
-                      children: [
-                        Container(
-                          width: double.infinity,
-                          height: 450,
-                          decoration: BoxDecoration(
-                            image: DecorationImage(
-                              fit: BoxFit.fill,
-                              image:
-                                  NetworkImage('$championImagesPath$nameChamp'
-                                      '_${skinNum.elementAt(index)}.jpg'),
-                            ),
-                          ),
-                          child: Column(
-                            mainAxisAlignment: MainAxisAlignment.end,
-                            crossAxisAlignment: CrossAxisAlignment.center,
-                            children: [
-                              Text(
-                                skinName
-                                    .elementAt(index)!
-                                    .replaceFirst(' ', '\n'),
-                                style: const TextStyle(
-                                    color: Colors.white, fontSize: 25),
-                                overflow: TextOverflow.clip,
-                                textAlign: TextAlign.center,
-                              ),
-                              SmoothPageIndicator(
-                                  controller: pageViewController,
-                                  count: skinName.length,
-                                  onDotClicked: (pageIndicator) =>
-                                      pageViewController.animateToPage(
-                                          pageIndicator,
-                                          duration:
-                                              const Duration(milliseconds: 600),
-                                          curve: Curves.ease)),
-                            ],
-                          ),
-                        ),
-                      ],
-                    ),
-                  ),
-                ),
-                Row(
-                  mainAxisAlignment: MainAxisAlignment.spaceAround,
-                  children: [
-                    GestureDetector(
-                      onTap: () {
-                         onTapText.value = championPassiveDescription!;
-                      },
-                      child: SizedBox(
-                        width: 75,
-                        child: Column(
-                          mainAxisAlignment: MainAxisAlignment.center,
-                          children: [
-                            Text(
-                              championPassiveName!,
-                              style: const TextStyle(color: Color(0xFFA7935F)),
-                              overflow: TextOverflow.clip,
-                              textAlign: TextAlign.center,
-                            ),
-                            Image(
-                              image: NetworkImage('$championPassivePath'
-                                  '$championPassive'),
-                            ),
-                          ],
-                        ),
-                      ),
-                    ),
-                    GestureDetector(
-                      onTap: () {
-                         onTapText.value = championSpellDescription.elementAt(0)!;
-                      },
-                      child: spellContainer(championSpellsName, championSpells, 0,
-                          championSpellDescription),
-                    ),
-                    GestureDetector(
-                      onTap: () {
-                         onTapText.value = championSpellDescription.elementAt(1)!;
-                      },
-                      child: spellContainer(championSpellsName, championSpells, 1,
-                          championSpellDescription),
-                    ),
-                    GestureDetector(
-                      onTap: () {
-                        onTapText.value =  onTapText.value = championSpellDescription.elementAt(2)!;
-                      },
-                      child: spellContainer(championSpellsName, championSpells, 2,
-                          championSpellDescription),
-                    ),
-                    GestureDetector(
-                      onTap: () {
-                        onTapText.value = championSpellDescription.elementAt(3)!;
-                      },
-                      child: spellContainer(championSpellsName, championSpells,
-                          3, championSpellDescription),
-                    ),
-                  ],
-                ),
+                PageViewChampionListOfSkinsComponent(pageViewController: pageViewController, skinName: skinName, skinNum: skinNum),
+                RowChampionPassiveAndSpellsComponent(
+                    onTapText: onTapText,
+                    championPassiveDescription: championPassiveDescription,
+                    championPassiveName: championPassiveName,
+                    championPassive: championPassive,
+                    championSpellDescription: championSpellDescription,
+                    championSpellsName: championSpellsName,
+                    championSpells: championSpells),
                 const SizedBox(
                   height: 20,
                 ),
                 Obx(
-                  ()=> Text(
+                  () => Text(
                     onTapText.string,
                     style:
                         const TextStyle(color: Color(0xFFA7935F), fontSize: 15),
@@ -194,7 +101,6 @@ class DetailsPage extends StatelessWidget {
               ],
             );
           }
-
           return Center(
             child: ElevatedButton(
               child: const Icon(Icons.refresh),
@@ -214,29 +120,5 @@ class DetailsPage extends StatelessWidget {
       ),
     );
   }
-
-  Widget spellContainer(
-    Iterable<String?> spellName,
-    Iterable<String?> championSpells,
-    int spellIndex,
-    Iterable<String?> spellDesc,
-  ) {
-    return SizedBox(
-      width: 75,
-      child: Column(
-        children: [
-          Text(
-            spellName.elementAt(spellIndex)!,
-            style: const TextStyle(color: Color(0xFFA7935F)),
-            overflow: TextOverflow.clip,
-            textAlign: TextAlign.center,
-          ),
-          Image(
-            image: NetworkImage('$championSpellPath'
-                '${championSpells.elementAt(spellIndex)}.png'),
-          ),
-        ],
-      ),
-    );
-  }
 }
+
