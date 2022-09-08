@@ -79,7 +79,10 @@ class DetailsPage extends StatelessWidget {
             var onTapText = ''.obs;
             return Column(
               children: [
-                PageViewChampionListOfSkinsComponent(pageViewController: pageViewController, skinName: skinName, skinNum: skinNum),
+                PageViewChampionListOfSkinsComponent(
+                    pageViewController: pageViewController,
+                    skinName: skinName,
+                    skinNum: skinNum),
                 RowChampionPassiveAndSpellsComponent(
                     onTapText: onTapText,
                     championPassiveDescription: championPassiveDescription,
@@ -94,8 +97,10 @@ class DetailsPage extends StatelessWidget {
                 Obx(
                   () => Text(
                     onTapText.string,
-                    style:
-                        const TextStyle(color: Color(0xFFA7935F), fontSize: 15),
+                    style: const TextStyle(
+                        color: Color(0xFFA7935F),
+                        fontSize: 12,
+                        overflow: TextOverflow.clip),
                   ),
                 ),
               ],
@@ -121,4 +126,3 @@ class DetailsPage extends StatelessWidget {
     );
   }
 }
-
