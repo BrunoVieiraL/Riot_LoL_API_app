@@ -2,7 +2,6 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:lol_api_getx_dio_app/controllers/champion_controller.dart';
 import 'package:lol_api_getx_dio_app/views/details_page.dart';
-
 import '../global_variables/global_variables.dart';
 import '../models/champions_model.dart';
 

@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-
 import '../../../global_variables/global_variables.dart';
 
 class TapChampionPassiveComponent extends StatelessWidget {

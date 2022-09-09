@@ -1,9 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-
 import '../../../global_variables/global_variables.dart';
-
-
 
 class TapChampionSpellCustomWidget extends StatelessWidget {
   const TapChampionSpellCustomWidget({

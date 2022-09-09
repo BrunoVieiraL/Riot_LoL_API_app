@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:smooth_page_indicator/smooth_page_indicator.dart';
-
 import '../../../global_variables/global_variables.dart';
 
 class PageViewChampionListOfSkinsComponent extends StatelessWidget {
@@ -51,7 +50,7 @@ class PageViewChampionListOfSkinsComponent extends StatelessWidget {
                       count: skinName.length,
                       onDotClicked: (pageIndicator) =>
                           pageViewController.animateToPage(pageIndicator,
-                              duration: const Duration(milliseconds: 600),
+                              duration: const Duration(milliseconds: 700),
                               curve: Curves.ease)),
                 ],
               ),
